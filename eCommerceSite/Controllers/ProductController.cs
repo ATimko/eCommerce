@@ -36,7 +36,8 @@ namespace eCommerceSite.Controllers
 
             //ViewBag/ViewData
             //ViewBag.MaxPage = 2;
-            ViewData["MaxPage"] = ProductDb.GetMaxPage(Content, PageSize);
+            ViewData["MaxPage"] = ProductDb.GetMaxPage(context, PageSize);
+            ViewData["CurrentPage"] = pageNum;
 
             return View(products);
         }

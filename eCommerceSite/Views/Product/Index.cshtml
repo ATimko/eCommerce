@@ -50,12 +50,25 @@
 </table>
 
 <ul class="pagination">
-    <li class="page-item">
-        <a class="page-link" asp-action="Index"
-           asp-route-id="1">Page 1</a>
-    </li>
-    <li class="page-item">
-        <a class="page-link" asp-action="Index"
-           asp-route-id="2">Page 2</a>
-    </li>
+    @for (int i = 1; i <= (int)ViewData["MaxPage"]; i++)
+    {
+        if (i == (int)ViewData["CurrentPage"])
+        {
+            <li class="page-item active">
+                <span class="page-link">Page @i</span>
+            </li>
+        }
+        else
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index"
+                   asp-route-id="@i">Page @i</a>
+            </li>
+        }
+
+    }
+    @*<li class="page-item">
+            <a class="page-link" asp-action="Index"
+               asp-route-id="2">Page 2</a>
+        </li>*@
 </ul>

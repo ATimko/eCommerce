@@ -35,11 +35,11 @@ namespace eCommerceSite.Models
             return p2;
 
             //LINQ query syntax - Grabbing a single product by id
-            Product p = (from prods in context.Products
-                         where prods.ProductId == id
-                         select prods).Single();
+            //Product p = (from prods in context.Products
+            //             where prods.ProductId == id
+            //             select prods).Single();
 
-            return p;
+            //return p;
         }
 
         public static List<Product> GetProductsByPage
