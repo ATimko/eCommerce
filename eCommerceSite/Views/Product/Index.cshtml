@@ -4,7 +4,13 @@
 }
 
 <a asp-action="Create"
-   asp-controller="Product">Create Product</a>
+   asp-controller="Product">Create Product</a><br />
+
+@*Html.ActionLink(linkText:"Search Products",
+                    actionName:"Search",
+                    controllerName:Product")*@
+
+<a asp-action="Search" asp-controller="Product">Search Product</a>
 
 <h1>All available products</h1>
 @*

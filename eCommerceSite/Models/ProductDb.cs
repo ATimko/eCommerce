@@ -8,6 +8,55 @@ namespace eCommerceSite.Models
 {
     public static class ProductDb
     {
+        public static List<Product> SearchProduct(CommerceContext context, SearchCriteria criteria)
+        {
+            /*
+             *  SELECT *
+             *  FROM Product
+             *  WHERE Price > criteria.LowPrice
+             *          AND Price < criteria.HighPrice
+             */
+
+            //SELECT * FROM Product
+            IQueryable<Product> allProducts = from p in context.Products
+                              select p;
+
+            //User typed something into it
+            //Concatenate WHERE Price >= LowPrice
+            if(criteria.LowPrice.HasValue)
+            {
+                allProducts = from p in allProducts
+                              where p.Price >= criteria.LowPrice
+                              select p;
+            }
+
+            //Add high price to the WHERE clause
+            if (criteria.HighPrice.HasValue)
+            {
+                allProducts = from p in allProducts
+                              where p.Price <= criteria.HighPrice
+                              select p;
+            }
+
+            //WHERE Category = criteria.Category
+            if(criteria.Category != null)
+            {
+                allProducts = from p in allProducts
+                              where p.Category == criteria.Category
+                              select p;
+            }
+
+            //Add WHERE Left(Name) = criteria.Name
+            if(criteria.Name != null)
+            {
+                allProducts = from p in allProducts
+                              where p.Name.StartsWith(criteria.Name)
+                              select p;
+
+            }
+            return allProducts.ToList();
+        }
+
         public static Product Add(Product p, CommerceContext db)
         {
             db.Products.Add(p);

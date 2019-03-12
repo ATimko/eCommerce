@@ -112,5 +112,12 @@ namespace eCommerceSite.Controllers
 
             return RedirectToAction("Index");
         }
+        public IActionResult Search(SearchCriteria search)
+        {
+            //SearchCriteria search = new SearchCriteria();
+            search.Products = ProductDb.SearchProduct(context, search);
+
+            return View(search);
+        }
     }
 }
