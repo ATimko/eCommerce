@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCommerceSite.Models
 {
@@ -91,7 +92,7 @@ namespace eCommerceSite.Models
             //return p;
         }
 
-        public static List<Product> GetProductsByPage
+        public static async Task<List<Product>> GetProductsByPage
             (CommerceContext context, int pageNum, int pageSize)
         {
             int pageOffset = 1;
@@ -101,12 +102,12 @@ namespace eCommerceSite.Models
             int numRecordsToSkip = (pageNum - pageOffset) * pageSize;
 
             //MAKE SURE SKIP IS CALLED BEFORE TAKE!!!!!!!!!!!!!!
-            return context
+            return await context
                         .Products
                         .OrderBy(p => p.Name)
                         .Skip(numRecordsToSkip)
                         .Take(pageSize)
-                        .ToList();
+                        .ToListAsync();
         }
 
         /// <summary>

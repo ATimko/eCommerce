@@ -19,7 +19,7 @@ namespace eCommerceSite.Controllers
         }
 
         //The id parameter will represent the page number
-        public IActionResult Index(int? id)
+        public async Task<IActionResult> Index(int? id)
         {
             #region Comments
             //List<Product> products = ProductDb.GetProducts(context);
@@ -34,7 +34,7 @@ namespace eCommerceSite.Controllers
             const int PageSize = 3;
 
             List<Product> products =
-                ProductDb.GetProductsByPage(context, pageNum, PageSize);
+               await ProductDb.GetProductsByPage(context, pageNum, PageSize);
 
             //ViewBag/ViewData
             //ViewBag.MaxPage = 2;
